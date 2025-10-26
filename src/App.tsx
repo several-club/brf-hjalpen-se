@@ -1,44 +1,31 @@
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/pages/HomePage';
 import { GuidesPage } from './components/pages/GuidesPage';
 import { BlogPage } from './components/pages/BlogPage';
 import { FAQPage } from './components/pages/FAQPage';
-
-export type Page = 'home' | 'guides' | 'blog' | 'faq';
+import { NotFoundPage } from './components/pages/NotFoundPage';
+import SEO from './components/SEO';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('home');
-  const [selectedBlogPostTitle, setSelectedBlogPostTitle] = useState<string | null>(null);
-
-  const navigateToPage = (page: Page, blogPostTitle?: string) => {
-    setCurrentPage(page);
-    if (page === 'blog' && blogPostTitle) {
-      setSelectedBlogPostTitle(blogPostTitle);
-    } else {
-      setSelectedBlogPostTitle(null);
-    }
+  const websiteJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'BRF Guide',
+    url: 'https://www.brf-guide.se/',
   };
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage onNavigate={navigateToPage} />;
-      case 'guides':
-        return <GuidesPage onNavigate={navigateToPage} />;
-      case 'blog':
-        return <BlogPage initialSelectedPostTitle={selectedBlogPostTitle} />;
-      case 'faq':
-        return <FAQPage />;
-      default:
-        return <HomePage onNavigate={navigateToPage} />;
-    }
+  const orgJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'BRF Guide',
+    url: 'https://www.brf-guide.se/',
+    logo: 'https://www.brf-guide.se/favicon.svg'
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      {/* Skip to main content link for keyboard users */}
+      <SEO jsonLd={[websiteJsonLd, orgJsonLd]} />
       <a 
         href="#main-content" 
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-[#C6B080] focus:text-white focus:rounded-lg focus:shadow-lg"
@@ -46,14 +33,18 @@ export default function App() {
       >
         HOPPA TILL INNEHÅLL
       </a>
-      
-      <Header currentPage={currentPage} onNavigate={navigateToPage} />
-      
+      <Header />
       <main id="main-content" className="flex-1" role="main">
-        {renderPage()}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/guider" element={<GuidesPage />} />
+          <Route path="/blogg" element={<BlogPage />} />
+          <Route path="/blogg/:slug" element={<BlogPage />} />
+          <Route path="/faq" element={<FAQPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
-      
-      <Footer onNavigate={navigateToPage} />
+      <Footer />
     </div>
   );
 }

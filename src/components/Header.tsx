@@ -1,28 +1,19 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import { Logo } from './Logo';
-import type { Page } from '../App';
 
-interface HeaderProps {
-  currentPage: Page;
-  onNavigate: (page: Page, blogPostTitle?: string) => void;
-}
-
-export function Header({ currentPage, onNavigate }: HeaderProps) {
+export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navItems: { label: string; page: Page }[] = [
-    { label: 'Hem', page: 'home' },
-    { label: 'Guider', page: 'guides' },
-    { label: 'Blogg', page: 'blog' },
-    { label: 'Vanliga frågor', page: 'faq' },
+  const navItems: { label: string; to: string }[] = [
+    { label: 'Hem', to: '/' },
+    { label: 'Guider', to: '/guider' },
+    { label: 'Blogg', to: '/blogg' },
+    { label: 'Vanliga frågor', to: '/faq' },
   ];
 
-  const handleNavigate = (page: Page) => {
-    onNavigate(page);
-    setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const closeMobile = () => setMobileMenuOpen(false);
 
   return (
     <header 
@@ -32,41 +23,40 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
       <div className="container mx-auto px-4 lg:px-[92px] py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <button
-            onClick={() => handleNavigate('home')}
-            className="focus:outline-none rounded-lg px-2 py-1"
-            aria-label="BRF Guide startsida"
-          >
+          <Link to="/" className="focus:outline-none rounded-lg px-2 py-1" aria-label="BRF Guide startsida" onClick={closeMobile}>
             <Logo />
-          </button>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-2" aria-label="Huvudnavigation">
             {navItems.map((item) => (
-              <button
-                key={item.page}
-                onClick={() => handleNavigate(item.page)}
-                className={`px-6 py-3 transition-all focus:outline-none active:outline-none relative ${
-                  currentPage === item.page
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) => `px-6 py-3 transition-all focus:outline-none active:outline-none relative ${
+                  isActive
                     ? 'text-[#C6B080]'
                     : 'text-[#1a1a1a] hover:text-[#C6B080] focus:ring-2 focus:ring-[#C6B080] focus:ring-offset-2 active:ring-0'
                 }`}
                 style={{
                   fontFamily: 'Inter, sans-serif',
                   fontSize: '17px',
-                  fontWeight: currentPage === item.page ? 600 : 400,
                   letterSpacing: '-0.4316px'
                 }}
-                aria-current={currentPage === item.page ? 'page' : undefined}
+                aria-current={({ isActive }) => (isActive ? 'page' : undefined) as any}
               >
-                {item.label}
-                {currentPage === item.page && (
-                  <span 
-                    className="absolute bottom-0 left-6 right-6 h-0.5 bg-[#C6B080]"
-                    aria-hidden="true"
-                  />
+                {({ isActive }) => (
+                  <>
+                    {item.label}
+                    {isActive && (
+                      <span 
+                        className="absolute bottom-0 left-6 right-6 h-0.5 bg-[#C6B080]"
+                        aria-hidden="true"
+                      />
+                    )}
+                  </>
                 )}
-              </button>
+              </NavLink>
             ))}
           </nav>
 
@@ -90,22 +80,21 @@ export function Header({ currentPage, onNavigate }: HeaderProps) {
             aria-label="Mobil navigation"
           >
             {navItems.map((item) => (
-              <button
-                key={item.page}
-                onClick={() => handleNavigate(item.page)}
-                className={`px-4 py-3 text-left transition-all rounded-lg focus:outline-none focus:ring-4 focus:ring-[#C6B080] focus:ring-opacity-50 ${
-                  currentPage === item.page
-                    ? 'bg-[#C6B080] text-white'
-                    : 'hover:bg-[#f9f9f4] text-[#1a1a1a]'
+              <NavLink
+                key={item.to}
+                to={item.to}
+                onClick={closeMobile}
+                className={({ isActive }) => `px-4 py-3 text-left transition-all rounded-lg focus:outline-none focus:ring-4 focus:ring-[#C6B080] focus:ring-opacity-50 ${
+                  isActive ? 'bg-[#C6B080] text-white' : 'hover:bg-[#f9f9f4] text-[#1a1a1a]'
                 }`}
                 style={{
                   fontFamily: 'Inter, sans-serif',
                   fontSize: '17px'
                 }}
-                aria-current={currentPage === item.page ? 'page' : undefined}
+                aria-current={({ isActive }) => (isActive ? 'page' : undefined) as any}
               >
                 {item.label}
-              </button>
+              </NavLink>
             ))}
           </nav>
         )}

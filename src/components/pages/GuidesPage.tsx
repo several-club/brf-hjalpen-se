@@ -3,11 +3,8 @@ import { Download, ArrowLeft, ArrowRight } from 'lucide-react';
 import boardMeetingImage from 'figma:asset/3fdf683013e2b0e5a82d296eb98905331b128386.png';
 import residentialAreaImage from 'figma:asset/04c1c854fcd7e64239c73e007c19a33518e72868.png';
 import apartmentBuildingImage from 'figma:asset/b8c99ceb382b3b8cd41caa87fcc4c622da16f125.png';
-import type { Page } from '../../App';
+import SEO from '@/components/SEO';
 
-interface GuidesPageProps {
-  onNavigate: (page: Page, blogPostTitle?: string) => void;
-}
 
 type GuideCategory = 'all' | 'economy' | 'maintenance' | 'legal' | 'board';
 
@@ -19,7 +16,7 @@ interface Guide {
   image: string;
 }
 
-export function GuidesPage({ onNavigate }: GuidesPageProps) {
+export function GuidesPage() {
   const [selectedCategory, setSelectedCategory] = useState<GuideCategory>('all');
   const [selectedGuide, setSelectedGuide] = useState<Guide | null>(null);
 
@@ -133,6 +130,11 @@ export function GuidesPage({ onNavigate }: GuidesPageProps) {
   if (selectedGuide) {
     return (
       <div style={{ backgroundColor: '#fcfbf7', minHeight: '100vh' }}>
+        <SEO
+          title={selectedGuide.title + ' – BRF Guide'}
+          description={selectedGuide.description}
+          canonicalPath={'/guider'}
+        />
         {/* Hero */}
         <section className="relative py-20" style={{ background: 'linear-gradient(135deg, #5C4F36 0%, #7A6849 50%, #5C4F36 100%)' }}>
           <div className="container mx-auto px-4 lg:px-[92px]">
@@ -215,6 +217,11 @@ export function GuidesPage({ onNavigate }: GuidesPageProps) {
 
   return (
     <div style={{ backgroundColor: '#fcfbf7', minHeight: '100vh' }}>
+      <SEO
+        title="Guider och mallar – BRF Guide"
+        description="Steg-för-steg guider för BRF‑styrelser inom ekonomi, underhåll, juridik och styrelsearbete."
+        canonicalPath="/guider"
+      />
       {/* Hero */}
       <section className="relative py-20" style={{ background: 'linear-gradient(135deg, #5C4F36 0%, #7A6849 50%, #5C4F36 100%)' }}>
         <div className="container mx-auto px-4 lg:px-[92px]">
@@ -279,6 +286,7 @@ export function GuidesPage({ onNavigate }: GuidesPageProps) {
                     src={guide.image}
                     alt={guide.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
                   />
                   {/* Category badge */}
                   <div className="absolute top-4 left-4 bg-[#f9f9f4] px-4 py-2 rounded">

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, Search } from 'lucide-react';
+import SEO from '@/components/SEO';
 
 interface FAQItem {
   question: string;
@@ -86,6 +87,11 @@ export function FAQPage() {
 
   return (
     <div style={{ backgroundColor: '#fcfbf7', minHeight: '100vh' }}>
+      <SEO
+        title="Vanliga frågor – BRF Guide"
+        description="Svar på vanliga frågor för BRF‑styrelser om ekonomi, underhåll, juridik och styrelsearbete."
+        canonicalPath="/faq"
+      />
       {/* Hero */}
       <section className="relative py-20" style={{ background: 'linear-gradient(135deg, #5C4F36 0%, #7A6849 50%, #5C4F36 100%)' }}>
         <div className="container mx-auto px-4 lg:px-[92px] relative z-10">

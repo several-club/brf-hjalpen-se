@@ -1,16 +1,9 @@
 import { ExternalLink } from 'lucide-react';
 import { Logo } from './Logo';
-import type { Page } from '../App';
+import { Link } from 'react-router-dom';
 
-interface FooterProps {
-  onNavigate: (page: Page, blogPostTitle?: string) => void;
-}
-
-export function Footer({ onNavigate }: FooterProps) {
-  const handleNavigate = (page: Page) => {
-    onNavigate(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+export function Footer() {
+  const handleClick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const currentYear = new Date().getFullYear();
 
@@ -30,40 +23,24 @@ export function Footer({ onNavigate }: FooterProps) {
             </h2>
             <ul className="space-y-3">
               <li>
-                <button
-                  onClick={() => handleNavigate('home')}
-                  className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline"
-                  style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}
-                >
+                <Link to="/" onClick={handleClick} className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}>
                   Hem
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavigate('guides')}
-                  className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline"
-                  style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}
-                >
+                <Link to="/guider" onClick={handleClick} className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}>
                   Guider
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavigate('blog')}
-                  className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline"
-                  style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}
-                >
+                <Link to="/blogg" onClick={handleClick} className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}>
                   Blogg
-                </button>
+                </Link>
               </li>
               <li>
-                <button
-                  onClick={() => handleNavigate('faq')}
-                  className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline"
-                  style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}
-                >
+                <Link to="/faq" onClick={handleClick} className="hover:text-[#C6B080] transition-colors focus:outline-none focus:text-[#C6B080] focus:underline" style={{ fontFamily: 'Inter, sans-serif', fontSize: '16px', fontWeight: 500, color: '#1a1a1a', letterSpacing: '-0.3125px' }}>
                   Vanliga frågor
-                </button>
+                </Link>
               </li>
             </ul>
           </nav>

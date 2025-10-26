@@ -9,6 +9,9 @@
   "framework": null,
   "outputDirectory": "build",
   "devCommand": "vite",
-  "buildCommand": "vite build",
-  "cleanUrls": true
+  "buildCommand": "vite build && node scripts/generate-sitemap.cjs",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }

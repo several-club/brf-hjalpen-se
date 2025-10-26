@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.brf-guide.se/sitemap.xml
+
+

@@ -1,14 +1,12 @@
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import SEO from '@/components/SEO';
 import boardMeetingImage from 'figma:asset/3fdf683013e2b0e5a82d296eb98905331b128386.png';
 import residentialAreaImage from 'figma:asset/04c1c854fcd7e64239c73e007c19a33518e72868.png';
 import apartmentBuildingImage from 'figma:asset/b8c99ceb382b3b8cd41caa87fcc4c622da16f125.png';
 import type { Page } from '../../App';
 
-interface HomePageProps {
-  onNavigate: (page: Page, blogPostTitle?: string) => void;
-}
-
-export function HomePage({ onNavigate }: HomePageProps) {
+export function HomePage() {
   const challenges = [
     {
       title: 'Skapa en årsbudget som håller',
@@ -64,6 +62,11 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
   return (
     <div style={{ backgroundColor: '#fcfbf7' }}>
+      <SEO
+        title="BRF Guide – Vägledning för BRF‑styrelser"
+        description="Kunskap och verktyg för BRF‑styrelser: budget, K3, underhållsplan och jämförelser (Uplan m.fl.)."
+        canonicalPath="/"
+      />
       {/* Hero Section */}
       <section 
         className="relative overflow-hidden" 
@@ -116,8 +119,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <button
-                  onClick={() => onNavigate('guides')}
+                <Link
+                  to="/guider"
                   className="bg-[#C6B080] hover:bg-[#3F4733] hover:shadow-xl hover:-translate-y-0.5 px-6 py-2.5 rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6B080] focus:ring-opacity-50 shadow-md inline-flex items-center gap-2 group whitespace-nowrap text-white"
                   style={{ 
                     fontFamily: 'Futura, sans-serif',
@@ -129,9 +132,9 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 >
                   UTFORSKA GUIDER
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button
-                  onClick={() => onNavigate('faq')}
+                </Link>
+                <Link
+                  to="/faq"
                   className="border-2 border-[#C6B080] text-[#C6B080] hover:bg-[#C6B080] hover:text-white hover:shadow-xl hover:-translate-y-0.5 px-6 py-2.5 rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6B080] focus:ring-opacity-50 shadow-md inline-flex items-center gap-2 group whitespace-nowrap"
                   style={{ 
                     fontFamily: 'Futura, sans-serif',
@@ -143,7 +146,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 >
                   VANLIGA FRÅGOR
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -253,8 +256,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   Som styrelseledamot vet du hur viktigt det är att ha en solid underhållsplan. Vi har granskat de populäraste alternativen för 2025 – från Uplan.se och Planima till Excel – och jämfört dem utifrån användarvänlighet, funktionalitet och kostnad.
                 </p>
 
-                <button
-                  onClick={() => onNavigate('blog', 'Bästa verktygen för underhållsplan i BRF – vår stora jämförelse 2025')}
+                <Link
+                  to="/blogg/basta-verktygen-for-underhallsplan-i-brf-var-stora-jamforelse-2025"
                   className="flex items-center gap-2 hover:gap-3 transition-all group"
                   style={{
                     fontFamily: 'Futura, sans-serif',
@@ -266,7 +269,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 >
                   LÄS HELA JÄMFÖRELSEN
                   <ArrowRight className="w-5 h-5" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -349,8 +352,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
           </div>
 
           <div className="text-center">
-            <button
-              onClick={() => onNavigate('guides')}
+            <Link
+              to="/guider"
               className="min-h-[48px] bg-[#C6B080] hover:bg-[#3F4733] text-white px-8 py-4 rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-[#C6B080] focus:ring-opacity-50 hover:shadow-xl"
               style={{ 
                 fontFamily: 'Futura, sans-serif',
@@ -361,7 +364,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
               aria-label="Se alla guider"
             >
               SE ALLA GUIDER
-            </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -656,8 +659,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
               <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#1a1a1a', lineHeight: '1.6', letterSpacing: '-0.4395px' }}>
                 Våra guider hjälper er att komma igång – från att inventera fastigheten till att uppskatta kostnader och prioritera rätt åtgärder.
               </p>
-              <button
-                onClick={() => onNavigate('guides')}
+              <Link
+                to="/guider"
                 className="min-h-[48px] bg-[#C6B080] hover:opacity-90 px-8 py-4 rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-[#C6B080] focus:ring-opacity-50"
                 style={{ 
                   fontFamily: 'Futura, sans-serif',
@@ -669,7 +672,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                 aria-label="Läs om underhåll i våra guider"
               >
                 LÄS OM UNDERHÅLL
-              </button>
+              </Link>
             </div>
 
             {/* Image */}
@@ -741,8 +744,8 @@ export function HomePage({ onNavigate }: HomePageProps) {
 
           {/* CTA Button */}
           <div className="text-center mt-12">
-            <button
-              onClick={() => onNavigate('faq')}
+            <Link
+              to="/faq"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-[#C6B080] hover:bg-[#B89665] transition-all group shadow-lg hover:shadow-xl"
               style={{
                 fontFamily: 'Futura, sans-serif',
@@ -755,7 +758,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
             >
               SE ALLA VANLIGA FRÅGOR
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>
