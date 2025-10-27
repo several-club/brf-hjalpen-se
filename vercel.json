@@ -11,6 +11,9 @@
   "devCommand": "vite",
   "buildCommand": "vite build && node scripts/generate-sitemap.cjs",
   "cleanUrls": true,
+  "routes": [
+    { "src": "/.*", "dest": "/index.html" }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
