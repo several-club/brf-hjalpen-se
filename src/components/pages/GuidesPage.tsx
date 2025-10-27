@@ -197,16 +197,46 @@ export function GuidesPage() {
 
               {/* Download button */}
               <div className="mt-12 text-center">
-                <button className="inline-flex items-center gap-3 bg-[#C6B080] hover:opacity-90 px-8 py-4 rounded transition-all" style={{ 
-                  fontFamily: 'Futura, sans-serif',
-                  fontSize: '16px',
-                  fontWeight: 500,
-                  color: 'white',
-                  letterSpacing: '1.5px'
-                }}>
-                  <Download className="w-5 h-5" />
-                  LADDA NER SOM PDF
-                </button>
+                {(() => {
+                  const mapTitleToFilename = (title: string): string | null => {
+                    const mapping: Record<string, string> = {
+                      'Så skapar ni en årsbudget steg för steg': 'budgetmall-checklista.pdf',
+                      'K3-redovisning förklarat': 'revisionsunderlag-checklista.pdf',
+                      'Bygg en underhållsplan som fungerar': 'underhallsplan-checklista.pdf',
+                      'Hantera stora renoveringsprojekt': 'protokoll-styrelsemote.pdf',
+                      'Styrelsens ansvar och arbetsformer': 'protokoll-styrelsemote.pdf',
+                      'Föreningsstämman – förberedelser och genomförande': 'kallelse-arsstamma.pdf',
+                    };
+                    return mapping[title] || null;
+                  };
+                  const mapped = mapTitleToFilename(selectedGuide.title);
+                  const href = mapped
+                    ? `/mallar/${mapped}`
+                    : `/mallar/${selectedGuide.title
+                        .toLowerCase()
+                        .replaceAll('å','a')
+                        .replaceAll('ä','a')
+                        .replaceAll('ö','o')
+                        .replace(/[^a-z0-9]+/g,'-')
+                        .replace(/(^-|-$)/g,'')}.pdf`;
+                  return (
+                    <a 
+                      href={href}
+                      download
+                      className="inline-flex items-center gap-3 bg-[#C6B080] hover:opacity-90 px-8 py-4 rounded transition-all"
+                      style={{ 
+                        fontFamily: 'Futura, sans-serif',
+                        fontSize: '16px',
+                        fontWeight: 500,
+                        color: 'white',
+                        letterSpacing: '1.5px'
+                      }}
+                    >
+                      <Download className="w-5 h-5" />
+                      LADDA NER SOM PDF
+                    </a>
+                  );
+                })()}
               </div>
             </div>
           </div>

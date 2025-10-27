@@ -5,6 +5,7 @@ import boardMeetingImage from 'figma:asset/3fdf683013e2b0e5a82d296eb98905331b128
 import residentialAreaImage from 'figma:asset/04c1c854fcd7e64239c73e007c19a33518e72868.png';
 import apartmentBuildingImage from 'figma:asset/b8c99ceb382b3b8cd41caa87fcc4c622da16f125.png';
 import type { Page } from '../../App';
+import { getTopMallar } from '@/data/mallar';
 
 export function HomePage() {
   const challenges = [
@@ -364,6 +365,71 @@ export function HomePage() {
               aria-label="Se alla guider"
             >
               SE ALLA GUIDER
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Mallar Section */}
+      <section className="py-24 bg-white border-t-2 border-b-2 border-[#e4dbdb]" aria-labelledby="mallar-heading">
+        <div className="container mx-auto px-4 lg:px-[92px]">
+          <div className="text-center mb-16">
+            <h2 
+              id="mallar-heading"
+              style={{ 
+                fontFamily: 'Futura, sans-serif', 
+                fontSize: 'clamp(28px, 4vw, 42px)', 
+                fontWeight: 700, 
+                color: '#C6B080',
+                letterSpacing: '2px',
+                marginBottom: '12px'
+              }}
+            >
+              MALLAR (PDF)
+            </h2>
+            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '18px', color: '#1a1a1a', letterSpacing: '-0.4395px' }}>
+              Nedladdningsbara mallar för kallelser, protokoll, checklistor och blanketter
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 max-w-6xl mx-auto">
+            {getTopMallar(6).map((m) => (
+              <article key={m.slug} className="bg-[#f9f9f4] p-6 rounded-lg border-2 border-[#e4dbdb] hover:border-[#C6B080] hover:shadow-xl transition-all">
+                <div className="mb-2">
+                  <span className="px-3 py-1 rounded-full bg-white border-2 border-[#e4dbdb]"
+                    style={{ fontFamily: 'Futura, sans-serif', fontSize: '11px', fontWeight: 600, color: '#7A6849', letterSpacing: '1px' }}>
+                    {m.category.toUpperCase()}
+                  </span>
+                </div>
+                <h3 style={{ fontFamily: 'Futura, sans-serif', fontSize: '20px', fontWeight: 700, color: '#C6B080', marginBottom: '8px' }}>{m.title}</h3>
+                <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', color: '#1a1a1a', lineHeight: '1.6', letterSpacing: '-0.1504px', marginBottom: '12px' }}>{m.description}</p>
+                <div>
+                  <a
+                    href={`/mallar/${m.filename}`}
+                    download
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded bg-[#C6B080] text-white hover:opacity-90 transition"
+                    style={{ fontFamily: 'Futura, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}
+                  >
+                    Ladda ner PDF
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Link
+              to="/mallar"
+              className="min-h-[48px] bg-[#C6B080] hover:bg-[#3F4733] text-white px-8 py-4 rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-[#C6B080] focus:ring-opacity-50 hover:shadow-xl"
+              style={{ 
+                fontFamily: 'Futura, sans-serif',
+                fontSize: '18px',
+                fontWeight: 500,
+                letterSpacing: '2px'
+              }}
+              aria-label="Se alla mallar"
+            >
+              SE ALLA MALLAR
             </Link>
           </div>
         </div>

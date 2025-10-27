@@ -9,6 +9,7 @@ export function Header() {
   const navItems: { label: string; to: string }[] = [
     { label: 'Hem', to: '/' },
     { label: 'Guider', to: '/guider' },
+    { label: 'Mallar', to: '/mallar' },
     { label: 'Blogg', to: '/blogg' },
     { label: 'Vanliga frågor', to: '/faq' },
   ];

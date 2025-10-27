@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Calendar, Clock, ArrowRight, ArrowLeft } from 'lucide-react';
 import SEO from '@/components/SEO';
 import { blogPosts, getPostBySlug, type BlogPost } from '@/data/blog';
+import ComparisonPost2025 from './ComparisonPost2025';
 
 interface BlogPageProps {}
 
@@ -30,6 +31,10 @@ export function BlogPage({}: BlogPageProps = {}) {
 
   // If a post is selected, show detail view
   if (selectedPost) {
+    // Special layout for the 2025 comparison post
+    if (selectedPost.slug === 'basta-verktygen-for-underhallsplan-i-brf-var-stora-jamforelse-2025') {
+      return <ComparisonPost2025 post={selectedPost} />;
+    }
     return (
       <div style={{ backgroundColor: '#fcfbf7', minHeight: '100vh' }}>
         <SEO

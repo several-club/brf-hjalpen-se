@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { HomePage } from './components/pages/HomePage';
 import { GuidesPage } from './components/pages/GuidesPage';
+import { MallarPage } from './components/pages/MallarPage';
 import { BlogPage } from './components/pages/BlogPage';
 import { FAQPage } from './components/pages/FAQPage';
 import { NotFoundPage } from './components/pages/NotFoundPage';
@@ -38,6 +39,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/guider" element={<GuidesPage />} />
+          <Route path="/mallar" element={<MallarPage />} />
           <Route path="/blogg" element={<BlogPage />} />
           <Route path="/blogg/:slug" element={<BlogPage />} />
           <Route path="/faq" element={<FAQPage />} />
